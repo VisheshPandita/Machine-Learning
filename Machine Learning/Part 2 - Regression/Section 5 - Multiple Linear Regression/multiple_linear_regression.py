@@ -6,13 +6,15 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 
-path = "/home/vishesh/Desktop/programming/ML/Machine Learning A-Z Template Folder/Part 2 - Regression/Section 5 -Multiple Linear Regression"
+path = '/home/vishesh/Desktop/programming/ML/Machine Learning/Part 2 - Regression/Section 5 - Multiple Linear Regression'
 os.chdir(path)
 
 # Importing the dataset
 dataset = pd.read_csv('50_Startups.csv')
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, 4].values
+
+# np.set_printoptions(formatter={'all':lambda x: str(x)})
 
 # Encoding categorical data
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
@@ -43,3 +45,6 @@ regressor.fit(X_train, y_train)
 
 # Predicting the Test set results
 y_pred = regressor.predict(X_test)
+
+# import statsmodels.formula.api as sm
+# X = np.append(arr=np.ones(50, 1).astype(int), values=X, axis=1)
