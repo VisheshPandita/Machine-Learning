@@ -24,10 +24,10 @@ onehotencoder = OneHotEncoder(categorical_features = [3])
 X = onehotencoder.fit_transform(X).toarray()
 
 # Avoiding the Dummy Variable Trap
-X = X[:, 1:]
+# X = X[:, 1:]
 
 # Splitting the dataset into the Training set and Test set
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
 # Feature Scaling
@@ -44,7 +44,11 @@ regressor = LinearRegression()
 regressor.fit(X_train, y_train)
 
 # Predicting the Test set results
-y_pred = regressor.predict(X_test)
+Y_pred = regressor.predict(X_test)
 
-# import statsmodels.formula.api as sm
-# X = np.append(arr=np.ones(50, 1).astype(int), values=X, axis=1)
+import statsmodels.formula.api as sm
+# Making interseptor
+X = np.append(arr=np.ones(shape=(50, 1), dtype=None).astype(int), values=X, axis=1)
+X_opt = X[:, [0,1,2,3,4]]
+regressor_ols = sm.OLS(endog=y, exog=X_opt).fit()
+regressor_ols.summary()
